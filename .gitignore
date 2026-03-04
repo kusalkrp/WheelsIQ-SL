@@ -40,6 +40,7 @@ logs/
 .coverage
 htmlcov/
 .pytest_cache/
+.mypy_cache/
 
 # Models cache
 models_cache/
