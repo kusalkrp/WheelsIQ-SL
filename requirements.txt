@@ -1,0 +1,60 @@
+# ============================================================
+# Prime Wheels SL — Production Dependencies
+# ============================================================
+
+# --- Scraping ---
+playwright>=1.49.0
+playwright-stealth>=1.0.6
+celery[redis]>=5.4.0
+
+# --- Database ---
+sqlalchemy[asyncio]>=2.0.36
+asyncpg>=0.30.0
+psycopg2-binary>=2.9.9
+alembic>=1.14.0
+
+# --- Vector DB ---
+qdrant-client>=1.12.0
+
+# --- Embeddings & Reranking ---
+# Removed FlagEmbedding and torch to save space. We now use Gemini APIs heavily.
+llama-index-embeddings-google-genai>=0.1.0
+
+# --- RAG Framework ---
+llama-index>=0.12.0
+llama-index-llms-gemini>=0.4.0
+llama-index-vector-stores-qdrant>=0.4.0
+llama-index-readers-database>=0.3.0
+
+# --- LLM ---
+google-genai>=0.8.0
+
+# --- Cache ---
+redis>=5.2.0
+
+# --- API ---
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+pydantic>=2.10.0
+pydantic-settings>=2.6.0
+python-multipart>=0.0.12
+python-jose[cryptography]>=3.3.0
+
+# --- Dashboard ---
+streamlit>=1.40.0
+plotly>=5.24.0
+pandas>=2.2.0
+
+# --- Evaluation ---
+ragas>=0.2.0
+deepeval>=1.4.0
+
+# --- Observability ---
+langfuse>=2.50.0
+prometheus-client>=0.21.0
+
+# --- Utilities ---
+httpx>=0.28.0
+python-dotenv>=1.0.1
+structlog>=24.4.0
+tenacity>=9.0.0

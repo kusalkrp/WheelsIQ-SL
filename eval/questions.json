@@ -1,0 +1,252 @@
+[
+    {
+        "question": "What is the average price of a Toyota Corolla 2020 in Colombo?",
+        "type": "clear",
+        "expected_fields": ["price_lkr", "make", "model", "district"]
+    },
+    {
+        "question": "Compare Honda Civic and Toyota Corolla prices",
+        "type": "comparison",
+        "expected_fields": ["make", "model", "price_lkr"]
+    },
+    {
+        "question": "Best hybrid SUV under 10 million rupees?",
+        "type": "complex",
+        "expected_fields": ["fuel_type", "price_lkr", "body_type"]
+    },
+    {
+        "question": "Good family car",
+        "type": "vague",
+        "expected_fields": ["make", "model"]
+    },
+    {
+        "question": "Most fuel efficient vehicles available?",
+        "type": "complex",
+        "expected_fields": ["fuel_type", "make"]
+    },
+    {
+        "question": "Toyota Aqua 2018 price range",
+        "type": "clear",
+        "expected_fields": ["make", "model", "yom", "price_lkr"]
+    },
+    {
+        "question": "What is the cheapest automatic car in Gampaha?",
+        "type": "clear",
+        "expected_fields": ["transmission", "price_lkr", "district"]
+    },
+    {
+        "question": "Are there any electric vehicles for sale?",
+        "type": "clear",
+        "expected_fields": ["fuel_type"]
+    },
+    {
+        "question": "Suzuki Wagon R vs Suzuki Alto comparison",
+        "type": "comparison",
+        "expected_fields": ["make", "model", "price_lkr"]
+    },
+    {
+        "question": "What's the average mileage of a 2019 Toyota Prius?",
+        "type": "clear",
+        "expected_fields": ["mileage_km", "make", "model", "yom"]
+    },
+    {
+        "question": "Show me diesel vans under 5 million",
+        "type": "complex",
+        "expected_fields": ["fuel_type", "body_type", "price_lkr"]
+    },
+    {
+        "question": "Most popular car brands in Sri Lanka",
+        "type": "clear",
+        "expected_fields": ["make"]
+    },
+    {
+        "question": "Nissan X-Trail 2017 with low mileage",
+        "type": "clear",
+        "expected_fields": ["make", "model", "yom", "mileage_km"]
+    },
+    {
+        "question": "What vehicles are available in Kandy?",
+        "type": "clear",
+        "expected_fields": ["district"]
+    },
+    {
+        "question": "Cheapest three wheeler available",
+        "type": "clear",
+        "expected_fields": ["category", "price_lkr"]
+    },
+    {
+        "question": "Honda Vezel vs Toyota CHR specs",
+        "type": "comparison",
+        "expected_fields": ["make", "model", "engine_cc", "fuel_type"]
+    },
+    {
+        "question": "Best value for money car under 3 million",
+        "type": "complex",
+        "expected_fields": ["price_lkr"]
+    },
+    {
+        "question": "Something reliable",
+        "type": "vague",
+        "expected_fields": []
+    },
+    {
+        "question": "What's the going rate for a pre-owned BMW 3 Series?",
+        "type": "clear",
+        "expected_fields": ["make", "model", "price_lkr"]
+    },
+    {
+        "question": "Motorcycles under 500,000 rupees in Galle",
+        "type": "complex",
+        "expected_fields": ["category", "price_lkr", "district"]
+    },
+    {
+        "question": "How much should I pay for a 2015 Mitsubishi Lancer?",
+        "type": "clear",
+        "expected_fields": ["make", "model", "yom", "price_lkr"]
+    },
+    {
+        "question": "4WD SUVs with automatic transmission",
+        "type": "complex",
+        "expected_fields": ["body_type", "transmission"]
+    },
+    {
+        "question": "Price difference between petrol and hybrid Toyota Aqua",
+        "type": "complex",
+        "expected_fields": ["make", "model", "fuel_type", "price_lkr"]
+    },
+    {
+        "question": "Newest vehicles posted today",
+        "type": "edge",
+        "expected_fields": ["posted_at"]
+    },
+    {
+        "question": "Which district has the cheapest cars?",
+        "type": "complex",
+        "expected_fields": ["district", "price_lkr"]
+    },
+    {
+        "question": "Depreciation rate of Toyota Prius over 5 years",
+        "type": "complex",
+        "expected_fields": ["make", "model", "yom", "price_lkr"]
+    },
+    {
+        "question": "Vehicles with sunroof and leather seats",
+        "type": "edge",
+        "expected_fields": ["options"]
+    },
+    {
+        "question": "KDH van for hire in Colombo area",
+        "type": "edge",
+        "expected_fields": ["model", "district"]
+    },
+    {
+        "question": "What percentage of listings are negotiable?",
+        "type": "complex",
+        "expected_fields": ["is_negotiable"]
+    },
+    {
+        "question": "Toyota vs Suzuki market share",
+        "type": "comparison",
+        "expected_fields": ["make"]
+    },
+    {
+        "question": "Low mileage cars under 50000 km for daily commute",
+        "type": "complex",
+        "expected_fields": ["mileage_km"]
+    },
+    {
+        "question": "Pink or red colored cars available",
+        "type": "edge",
+        "expected_fields": ["color"]
+    },
+    {
+        "question": "1500cc engine cars with good fuel economy",
+        "type": "complex",
+        "expected_fields": ["engine_cc", "fuel_type"]
+    },
+    {
+        "question": "Reconditioned vehicles from Japan under 8 million",
+        "type": "complex",
+        "expected_fields": ["condition", "price_lkr"]
+    },
+    {
+        "question": "Heavy duty trucks for construction work",
+        "type": "edge",
+        "expected_fields": ["category"]
+    },
+    {
+        "question": "What's more affordable - Civic or Corolla 2021?",
+        "type": "comparison",
+        "expected_fields": ["make", "model", "yom", "price_lkr"]
+    },
+    {
+        "question": "Show me all pickup trucks",
+        "type": "clear",
+        "expected_fields": ["category"]
+    },
+    {
+        "question": "Luxury cars over 30 million rupees",
+        "type": "clear",
+        "expected_fields": ["price_lkr"]
+    },
+    {
+        "question": "First car recommendation for a new driver",
+        "type": "vague",
+        "expected_fields": []
+    },
+    {
+        "question": "Are there any Tesla vehicles in Sri Lanka?",
+        "type": "edge",
+        "expected_fields": ["make"]
+    },
+    {
+        "question": "Average age of vehicles on the market",
+        "type": "complex",
+        "expected_fields": ["yom"]
+    },
+    {
+        "question": "Tuk tuk prices in Matara",
+        "type": "clear",
+        "expected_fields": ["category", "district", "price_lkr"]
+    },
+    {
+        "question": "Best time to buy a used car in Sri Lanka",
+        "type": "vague",
+        "expected_fields": []
+    },
+    {
+        "question": "Land Cruiser vs Montero Sport off-road comparison",
+        "type": "comparison",
+        "expected_fields": ["make", "model"]
+    },
+    {
+        "question": "How many listings are from the Western Province?",
+        "type": "complex",
+        "expected_fields": ["province"]
+    },
+    {
+        "question": "CNG vehicles available",
+        "type": "edge",
+        "expected_fields": ["fuel_type"]
+    },
+    {
+        "question": "Manual transmission SUVs with 4WD",
+        "type": "complex",
+        "expected_fields": ["transmission", "body_type"]
+    },
+    {
+        "question": "What's the most expensive vehicle listed right now?",
+        "type": "clear",
+        "expected_fields": ["price_lkr"]
+    },
+    {
+        "question": "Cars with ABS and airbags under 6 million",
+        "type": "complex",
+        "expected_fields": ["options", "price_lkr"]
+    },
+    {
+        "question": "Give me a market summary for February 2026",
+        "type": "complex",
+        "expected_fields": ["posted_at"]
+    }
+]

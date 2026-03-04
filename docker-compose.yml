@@ -1,0 +1,122 @@
+# docker-compose.yml — Prime Wheels SL Production Stack
+
+services:
+  # =========================
+  # DATA LAYER
+  # =========================
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: primewheels
+      POSTGRES_USER: pw_user
+      POSTGRES_PASSWORD: ${PG_PASSWORD:-changeme}
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./docker/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pw_user -d primewheels"]
+      interval: 10s
+      retries: 5
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.1
+    volumes:
+      - qdrant_data:/qdrant/storage
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    environment:
+      QDRANT__SERVICE__GRPC_PORT: 6334
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # =========================
+  # APPLICATION LAYER
+  # =========================
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://pw_user:${PG_PASSWORD:-changeme}@postgres:5432/primewheels
+      - SYNC_DATABASE_URL=postgresql://pw_user:${PG_PASSWORD:-changeme}@postgres:5432/primewheels
+      - REDIS_URL=redis://redis:6379/0
+      - QDRANT_URL=http://qdrant:6333
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --workers 4 --log-level info
+    restart: unless-stopped
+
+  celery-worker:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    env_file: .env
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://pw_user:${PG_PASSWORD:-changeme}@postgres:5432/primewheels
+      - SYNC_DATABASE_URL=postgresql://pw_user:${PG_PASSWORD:-changeme}@postgres:5432/primewheels
+      - REDIS_URL=redis://redis:6379/0
+      - QDRANT_URL=http://qdrant:6333
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: celery -A scraper.tasks worker --loglevel=info --concurrency=3
+    restart: unless-stopped
+
+  celery-beat:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.worker
+    env_file: .env
+    environment:
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: celery -A scraper.tasks beat --loglevel=info --schedule=/tmp/celerybeat-schedule
+    restart: unless-stopped
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.dashboard
+    env_file: .env
+    environment:
+      - API_URL=http://api:8000
+      - SYNC_DATABASE_URL=postgresql://pw_user:${PG_PASSWORD:-changeme}@postgres:5432/primewheels
+    ports:
+      - "8501:8501"
+    depends_on:
+      - api
+    command: streamlit run dashboard/app.py --server.port=8501 --server.address=0.0.0.0 --server.headless=true
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  qdrant_data:
+  redis_data:
